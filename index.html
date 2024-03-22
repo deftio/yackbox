@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XLite Chat</title>
+    <script src="./xlite_chat.js" ></script>
+    <link rel="stylesheet" href="./xlite_chat.css">
+    <style>
+      html {
+        box-sizing:border-box;
+
+        font-family: sans-serif;
+        height: 100%;
+        width: 100%;
+      }
+      #chat-container {
+        height: 400px;
+        width : 500px;
+        border : 2px solid green;
+        border-radius: 5px;
+      }
+    </style>
+   
+</head>
+<body>
+    <h2>xlite_chat demo</h2>
+  <div id="chat-container"></div><br>
+  <div id="#log"></div>
+
+  
+  <script>
+    const chat = new xlite_chat('#chat-container', cb)
+    chat.addMessage("This is a message","Foo","left")
+    chat.addMessage("This is a message","Bar","right")
+    
+    function cb(user, content, id) {
+      document.getElementById('#log').innerHTML += `<div> ${id} - ${user}: ${content}</div>`
+    }
+      
+  </script>
+</body>
+</html>

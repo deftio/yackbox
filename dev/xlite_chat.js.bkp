@@ -1,0 +1,117 @@
+class xlite_chat {
+    constructor(div, callback) {
+        this.container = document.querySelector(div);
+        this.userName = "You";
+        this.callback = (callback) ? callback : ()=>{};
+        this.messages = [];
+        this.initUI();
+    }
+
+    initUI() {
+        this.container.innerHTML = `
+            <div class="xlite_chat-container">
+            <div class="xlite_chat-messages"></div>
+            <div class="xlite_chat-input-area">
+                <textarea class="xlite_chat-input" placeholder="Type here..."></textarea>
+                <div class="xlite-chat-sep"></div>
+                <button class="xlite_chat-submit">Send</button>
+            </div>
+            </div>
+        `;
+         // Add event listener to the chat input textarea
+         const inputTextarea = this.container.querySelector('.xlite_chat-input');
+         console.log(inputTextarea)
+         inputTextarea.addEventListener('keydown', (event) => {
+             // Check if Shift + Enter is pressed
+             if (event.shiftKey && event.keyCode === 13) {
+                 // Prevent default behavior (adding new line)
+                 event.preventDefault();
+                 // Submit the message
+                 const content = inputTextarea.value.trim(); // Remove leading/trailing whitespace
+                 if (content !== '') {
+                     chat.addMessage(content, 'You', 'right');
+                     inputTextarea.value = ''; // Clear input field after sending
+                 }
+             }
+         });
+        this.messagesContainer = this.container.querySelector('.xlite_chat-messages');
+        this.input = this.container.querySelector('.xlite_chat-input');
+        this.submitButton = this.container.querySelector('.xlite_chat-submit');
+
+        this.submitButton.addEventListener('click', () => {
+            const content = this.input.value;
+            this.input.value = ''; // Clear input field after sending
+            this.addMessage(content, this.userName, 'right');
+        });
+    }
+    setDefaultUserName (user = "You") {
+        this.userName=user;
+    }
+
+    // add a new message to the chat
+    addMessage(content, user, alignment = 'left', fireCallback = true) {
+        const id = this.messages.length;
+        const message = { id, user, content, alignment };
+        this.messages.push(message);
+
+        const userContent = `<span class="xlite_chat-username" xlite_class_username="${user}">${user}</span> `;
+        const messageHTML = alignment === 'right' ?
+            `<div id="msg-${id}" class="xlite_chat-right">${content} ${userContent}</div>` :
+            `<div id="msg-${id}" class="xlite_chat-left">${userContent} ${content}</div>`;
+
+        this.messagesContainer.innerHTML += messageHTML;
+        if (fireCallback) {
+            this.callback(user, content, id);
+        }
+        return id;
+    }
+
+    getMessage(id) {
+        return this.messages.find(msg => msg.id === id);
+    }
+
+    // update every part of a message
+    updateMessageFull (id, content, user = null, side = null) {
+        const message = this.messages.find(msg => msg.id === id);
+        if (!message) return;
+
+        if (content) message.content = content;
+        if (user) message.user = user;
+        if (side) message.whichSide = side;
+
+        const messageDiv = this.container.querySelector(`#msg-${id}`);
+        if (messageDiv) {
+            messageDiv.innerHTML = `<strong>${message.user}</strong>: ${message.content}`;
+            messageDiv.style.textAlign = message.whichSide === 'right' ? 'right' : 'left';
+        }
+    }
+
+  // append new content to an existing message, useful for streaming or token by token  
+  appendMessageContent (id, content) {
+      const message = this.messages.find(msg => msg.id === id);
+      if (!message) return;
+
+      if (content) message.content += content;
+
+      const messageDiv = this.container.querySelector(`#msg-${id}`);
+      if (messageDiv) {
+          messageDiv.innerHTML = `<strong>${message.user}</strong>: ${message.content}`;
+          messageDiv.style.textAlign = message.whichSide === 'right' ? 'right' : 'left';
+      }
+  }
+
+    removeMessage(id) {
+        const messageIndex = this.messages.findIndex(msg => msg.id === id);
+        if (messageIndex > -1) {
+            this.messages.splice(messageIndex, 1);
+            const messageDiv = this.container.querySelector(`#msg-${id}`);
+            if (messageDiv) {
+                messageDiv.parentNode.removeChild(messageDiv);
+            }
+        }
+    }
+
+    getLog() {
+        return this.messages;
+    }
+}
