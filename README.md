@@ -11,13 +11,13 @@ Responsive design for various screen sizes.
 Installation
 To use XLite Chat in your project, follow these steps:
 
-Include the xlite_chat.js JavaScript file in your project.
-Link the xlite_chat.css stylesheet to style the chat interface.
+Include the yackbox.js JavaScript file in your project.
+Link the yackbox.css stylesheet to style the chat interface.
 html
 
 ```html
-<script src="xlite_chat.js"></script>
-<link rel="stylesheet" href="xlite_chat.css">
+<script src="yackbox.js"></script>
+<link rel="stylesheet" href="yackbox.css">
 ```
 
 Create a container element in your HTML where you want the chat interface to appear:
@@ -27,7 +27,7 @@ Create a container element in your HTML where you want the chat interface to app
 
 Initialize XLite Chat in your JavaScript code by providing the container element and a callback function for message events:
 ```javascript
-const chat = new xlite_chat('#chat-container', messageCallback);
+const chat = new yackbox('#chat-container', messageCallback);
 //Use the provided methods to interact with the chat control:
 
 // Add a message

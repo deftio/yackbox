@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>XLite Chat</title>
-    <script src="./xlite_chat.js" ></script>
-    <link rel="stylesheet" href="./xlite_chat.css">
+    <script src="./yackbox.js" ></script>
+    <link rel="stylesheet" href="./yackbox.css">
     <style>
       html {
         box-sizing:border-box;
@@ -23,13 +23,13 @@
    
 </head>
 <body>
-    <h2>xlite_chat demo</h2>
+    <h2>yackbox demo</h2>
   <div id="chat-container"></div><br>
   <div id="#log"></div>
 
   
   <script>
-    const chat = new xlite_chat('#chat-container', cb)
+    const chat = new yackbox('#chat-container', cb)
     chat.addMessage("This is a message","Foo","left")
     chat.addMessage("This is a message","Bar","right")
     

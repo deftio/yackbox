@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        type="image/gif">
+
+    <title>YackBox Demo with local Ollama</title>
+    <!-- Include Bootstrap CSS file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include XLite Chat CSS file -->
+    <link rel="stylesheet" href="../../yackbox.css">
+
+    <!-- Include XLite Chat JavaScript file -->
+    <script src="../../yackbox.js"></script>
+
+    <script src="./ollama_simple_adapter.js"></script>
+    <style>
+        #chat-container {
+            height: 50vh;
+            width: 700px;
+            border-radius: 1em;
+            border: 4px solid rgb(97, 70, 21);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container col-5">
+        <h1 class="mb-4">XLite Chat Demo</h1>
+
+        <!-- Container for the chat interface -->
+        <div id="chat-container" class="border mb-4"></div>
+    </div>
+
+
+    <script>
+
+        const chat = new yackbox('#chat-container', getOllamaStreamingCallback);
+        chat.setDefaultUserName("Me", "left");  // this is the user's name
+
+        // initial message in chat
+        chat.addMessage("How can I help? ", "Bot", "left")
+
+
+        // ollama functions with stream
+        /*
+        fetch('http://localhost:11434/api/chat', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                model: "llama2",
+                messages: [
+                    {
+                        role: "user",
+                        content: "why is the sky blue?",
+                        stream: false
+                    }
+
+                ]
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        */
+    </script>
+</body>
+
+</html>
