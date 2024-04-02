@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Div Example</title>
+    <style>
+        #div1 {
+            width: 500px;
+            height: 400px; /* Adjust this as needed */
+            background-color: lightgrey;
+            position: relative;
+            padding:5px;
+            border: 3px solid green;
+            border-radius: 10px;
+        }
+        #div2, #div3 {
+            border-radius: 8px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+        }
+        #div2 {
+            top: 0;
+            height: 100%; /* Make div2 initially take up the full height */
+            background-color: skyblue;
+        }
+        #div3 {
+            bottom: 0;
+            height: 3em; /* Adjust based on your content */
+            background-color: coral;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1">
+    <div id="div2">Div 2</div>
+    <div id="div3">Div 3</div>
+</div>
+<button onclick="toggleDiv3()">Toggle Div 3</button>
+
+<script>
+    function toggleDiv3() {
+        var div3 = document.getElementById('div3');
+        if (div3.style.display === 'none') {
+            div3.style.display = ''; // Show div3
+        //    div3.style.height = '50%'; // Adjust this value as necessary
+           // document.getElementById('div2').style.height = '50%'; // Make space for div3
+        } else {
+            div3.style.display = 'none'; // Hide div3
+          //  div3.style.height = '0'; // Collapse div3
+           // document.getElementById('div2').style.height = '100%'; // Expand div2 to fill space
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
         type="image/gif">
 
-    <title>YackBox Demo with local Ollama</title>
+    <title>YackBox with Dual Chatrooms Example</title>
     <!-- Include Bootstrap CSS file -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Include XLite Chat CSS file -->
@@ -16,7 +16,6 @@
     <!-- Include XLite Chat JavaScript file -->
     <script src="../../yackbox.js"></script>
 
-    <script src="./ollama_simple_adapter.js"></script>
     <style>
         html, body {
             width: 100%;
@@ -35,34 +34,30 @@
 </head>
 
 <body>
-       
 
     <div class="container">
-        <h2 class="">Ollama YackBox Demo</h2>
+        <h2 class="mb-4">Dual Chat Containers</h2>
+
         <div class="row">
-            <div class="col-5">
-                <h4>Completions Chat</h4>
-                <div class="chat-container" id="chat-container1"></div> 
-            </div>
-            <div class="col-1" style="height:100%;"></div>
-            <div class="col-5">
-                <h4>Streaming Chat</h4>
-                <div class="chat-container" id="chat-container2"></div> 
-            </div>
+            <div class="md-col-5"><div class="chat-container" id="chat-container1"></div> </div>
+            <div class="md-col-5"><div class="chat-container" id="chat-container2"></div> </div>
         </div>
     </div>
 
 
     <script>
 
-        const completionsChat = new yackbox('#chat-container1', getOllamaCompletionCallback);
-        completionsChat.setDefaultUserName("Me", "left");  // this is the user's name
-        completionsChat.addMessage("How can I help? ", "Bot", "left");
 
-        const streamingChat = new yackbox('#chat-container2', getOllamaStreamingCallback);
-        streamingChat.setDefaultUserName("Me", "left");  // this is the user's name
-        streamingChat.addMessage("How can I help? ", "Bot", "left"); 
+        const chat1 = new yackbox('#chat-container1');
+        const chat2 = new yackbox('#chat-container2');
+        cb1 = (context, fn) => {chat1.addMessage(context.content,"ABC")}
+        cb2 = (context, fn) => {chat2.addMessage(context.content,"DEF")}
+        chat1.addCompletionCallback(cb2);
+        chat2.addCompletionCallback(cb1);
         
+        
+        
+    
     </script>
 </body>
 
