@@ -1,4 +1,4 @@
-# yackbox 
+# yackbox.js 
 yackbox is a simple vanilla (no dependancies) JavaScript chat control that can be easily integrated into web applications. It provides a customizable chat interface with support for adding, updating, and removing messages, along with multi-user support and message history controls.
 
 ## Features
@@ -45,11 +45,11 @@ const log = chat.getLog();
 console.log(log);
 ```
 
-### Usage
+## Usage
 Yackbox is highly customizable and can be integrated into various web applications. You can modify the appearance and behavior of the chat interface by adjusting the CSS styles and JavaScript code according to your requirements.
 
 
-### Examples
+## Examples
 Included are several examples including:
 * UMD and ESM usage in browser
 * Multiuser and multiple instance setups
@@ -58,6 +58,6 @@ Included are several examples including:
 
 ## Contributors
 
-# License
+## License
 yackbox is licensed under the BSD-2 License.
 

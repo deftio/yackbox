@@ -3,12 +3,22 @@
 ## ToDo
 
 
-
 ### hide / show chat input area
 Needs to be able to hide / show chat area
 
 ### get rid of css file 
 the css should be inline with the api as js params.
+
+### limit / set max history of messages stored
+
+### examples:
+chatgpt  (enter your api key)
+mistral.ai (enter your api key)
+anthropic (entry your own api key)
+fastapi - completions example (complete folder where fastapi is used for completions)
+fastapi - streaming sse example (complete folder where fastapi is used for streaming)
+nodejs / express - streaming example
+running stats
 
 ### add listeners
 add event lister subscriber:
@@ -24,7 +34,6 @@ many chat apps need history of the conversation to be able to generate a respons
 make flag for "last" message received.  (also used for firing message listener events.)
 
 ### user mgmt
-
 add / remove users from the chat, get stats on users, get message by users
 
 addInfo ({})
@@ -48,7 +57,6 @@ addInfo ({})
 
 
 ## Notes on completion and streaming callbacks
-
 We can memoize this to make a single callback ..
 
 let addmsg= this.addMessage.bind(this);
