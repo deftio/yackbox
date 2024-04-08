@@ -2,13 +2,7 @@
 
 ## ToDo
 
-### support for "center" user
-       <username>
-  "user content is centered"
 
-This is useful in refereed or adversarial chats like a courtroom or moderator.
-
-make css for left / right / center classes clear for devs to style
 
 ### hide / show chat input area
 Needs to be able to hide / show chat area

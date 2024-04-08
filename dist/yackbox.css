@@ -1,0 +1,87 @@
+.yackbox-container {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-sizing:border-box;
+  }
+  
+  .yackbox-messages {
+    overflow-y: auto;
+    border: 1px solid #d51414;
+    border-radius: 5px;
+    padding: 5px;
+    height: calc(98% - 2.5em);
+    top: 5px;
+    left: 5px;
+    right: 5px;
+  }
+  
+  .yackbox-message {
+    position: relative;
+    width: 95%;
+  }
+  .yackbox-content {
+    width: 95%;
+    padding-bottom: 0.5em;
+    border: 1px solid orange;
+  }
+  /* overall container */
+  .yackbox-input-area {
+    width : auto;
+    display: flex;
+    border: 1px solid darkmagenta;
+    height: 2.5em;
+    padding-bottom: 5px;
+  }
+  /* typing area */
+  .yackbox-input-textbox {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid hotpink;
+    width: 89%;
+    resize: none;
+  }
+  /* space in between */
+  .yackbox-sep {
+    height: 100%;
+    width : 1%;
+  }
+  /* submit button */
+  .yackbox-submit {
+    cursor: pointer;
+    border: 1px solid #873f3fd2;
+    background-color: #f0f0f0;
+    height: 100%;
+    width: 10%;
+    border-radius: 4px;
+  }
+  
+  .yackbox-left {
+    text-align: left;
+    white-space: pre-wrap;
+    width: auto;
+    padding-right: 5%;
+  }
+  .yackbox-right {
+    text-align: right;
+    white-space: pre-wrap;
+    width: auto;
+    padding-left: 5%;
+  }
+  .yackbox-center {
+    text-align: center;
+    white-space: pre-wrap;
+    width: auto;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+  
+  .yackbox-username {
+    border: 1px solid teal;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  

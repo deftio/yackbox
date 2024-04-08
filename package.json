@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A lightweight chatbox control in pure js (both esm and umd) which can be used for chat and llm applications. ",
   "main": "rollup.config.js",
+  "type": "module",
   "directories": {
     "example": "examples",
     "test": "test"
@@ -10,7 +11,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c"
-
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,13 @@
     "chat",
     "llm"
   ],
-  "author": "m a chatterjee (deftio)",
+  "author": "Manu Chatterjee (deftio)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/deftio/yackbox/issues"
   },
-  "homepage": "https://github.com/deftio/yackbox#readme"
+  "homepage": "https://github.com/deftio/yackbox#readme",
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4"
+  }
 }

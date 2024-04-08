@@ -1,0 +1,68 @@
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import { terser } from '@rollup/plugin-terser'; // Import the terser plugin
+
+const extensions = ['.js', '.jsx'];
+
+// Rollup configuration for the yackbox project
+export default [
+  {
+    input: 'src/yackbox.js', // src entry code
+    output: {
+      file: 'dist/yackbox.umd.js',
+      format: 'umd',
+      name: 'yackbox',
+     /* globals: {
+        yackbox: 'window.yackbox',
+      },*/
+      sourcemap: true // Enable source maps for better debugging
+    },
+    plugins: [
+      resolve({ extensions }),
+      commonjs(),
+      babel({
+        extensions,
+        exclude: 'node_modules/**', // Only transpile our source code
+        babelHelpers: 'bundled',
+        presets: ['@babel/preset-env']
+      })
+    ]
+  },
+  {
+    input: 'src/yackbox.js',
+    output: {
+      file: 'dist/yackbox.cjs.js',
+      format: 'cjs',
+      sourcemap: true
+    },
+    plugins: [
+      resolve({ extensions }),
+      commonjs(),
+      babel({
+        extensions,
+        exclude: 'node_modules/**',
+        babelHelpers: 'bundled',
+        presets: ['@babel/preset-env']
+      })
+    ]
+  },
+  {
+    input: 'src/yackbox.js',
+    output: {
+      file: 'dist/yackbox.esm.js',
+      format: 'es',
+      sourcemap: true
+    },
+    plugins: [
+      resolve({ extensions }),
+      commonjs(),
+      babel({
+        extensions,
+        exclude: 'node_modules/**',
+        babelHelpers: 'bundled',
+        presets: ['@babel/preset-env']
+      })
+    ]
+  }
+];

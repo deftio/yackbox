@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html,body {
+          box-sizing:border-box;
+          font-family: sans-serif;
+          height: 100%;
+          width: 100%;
+        }
+        body {
+          margin : 4%;
+        }
+        #chat-container {
+          height: 400px;
+          width : 600px;
+          border : 2px solid rgb(79, 9, 64);
+          border-radius: 5px;
+        }
+      </style>
+     <!-- Include  Yackbox CSS file -->
+    <link rel="stylesheet" href="../../dist/yackbox.css">
+
+    <title>Yackbox Example</title>
+</head>
+<body>
+    <h1 class="mb-4">YackBox Demo</h1>
+        <p>
+        yackbox.js is a simple (pure vanilla) javascript chat control for testing simple chat and AI bot applications.
+        </p>
+    <!-- Container for the chat interface -->
+      
+    <div id="chat-container" style="width: 400px; height: 300px; border: 1px solid #000;">
+        <!-- Chatbox will load here -->
+    </div>
+
+    <script type="module">
+        import yackbox from '../../dist/yackbox.esm.js';
+
+        // Callback function for when the chat is submitted
+        function completionCallback(message) {
+            console.log("Chat submitted:", message);
+        }
+
+        // Create a new instance of yackbox
+        const chat = new yackbox('#chat-container', completionCallback);
+
+        // Add a message to the chatbox (example usage)
+        chat.addMessage("Welcome to Yackbox!", "System"); 
+
+        // add to the window so we can inspect it in the console
+        window.chat = chat;  // this is not neceessary for production code
+    </script>
+</body>
+</html>
