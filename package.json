@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "generate-sri": "cat ./dist/yackbox.umd.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.js_sri.txt && cat ./dist/yackbox.umd.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.min.js_sri.txt && cat ./dist/yackbox.esm.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.js_sri.txt && cat ./dist/yackbox.esm.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.min.js_sri.txt"
   },
   "repository": {
     "type": "git",
