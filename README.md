@@ -56,6 +56,10 @@ Included are several examples including:
 * Using message history and stats
 * Streaming and completions based LLM use
 
+## Building from Source
+Make sure to run npm install.  Then run npm run build.
+Note that at run time yackbox has no dependancies, but at build time several tools are used for packing and minifying code.
+
 ## Contributors
 
 ## License
