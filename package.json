@@ -11,7 +11,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
-    "generate-sri": "cat ./dist/yackbox.umd.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.js_sri.txt && cat ./dist/yackbox.umd.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.min.js_sri.txt && cat ./dist/yackbox.esm.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.js_sri.txt && cat ./dist/yackbox.esm.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.min.js_sri.txt"
+    "make-index.html": "./node_modules/docbat/src/docbat-cli.js -i README.md -o index.html",
+    "generate-sri": "cat ./dist/yackbox.umd.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.js_sri.txt && cat ./dist/yackbox.umd.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.umd.min.js_sri.txt && cat ./dist/yackbox.esm.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.js_sri.txt && cat ./dist/yackbox.esm.min.js | openssl dgst -sha384 -binary | openssl base64 -A > ./dist/yackbox.esm.min.js_sri.txt",
+    "build-all": "npm run build && npm run generate-sri && npm run make-index.html"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,10 @@
   },
   "homepage": "https://github.com/deftio/yackbox#readme",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4"
+    "@rollup/plugin-terser": "^0.4.4",
+    "docbat": "^0.9.3"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
   }
 }

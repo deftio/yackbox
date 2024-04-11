@@ -30,7 +30,7 @@ Any manual edits may be lost.
 .bw-table-sort-xxa::after{content:"\00a0";}
 
 .bw-tab-item-list{margin:0;padding-inline-start:0;}
-.bw-tab-item{display:inline;padding-top:0.5em;padding-left:0.75em;padding-right:0.75em;border-top-right-radius:7px;border-top-left-radius:7px;}
+.bw-tab-item{display:inline;padding-top:0.75em;padding-left:0.75em;padding-right:0.75em;border-top-right-radius:7px;border-top-left-radius:7px;}
 .bw-tab-active{font-weight:700;}
 .bw-tab:hover{cursor:pointer;font-weight:700;}
 .bw-tab-content-list{margin:0;padding-top:0.0em;}
@@ -138,13 +138,17 @@ console.log(log);
 <h2 id="usage">Usage</h2>
 <p>Yackbox is highly customizable and can be integrated into various web applications. You can modify the appearance and behavior of the chat interface by adjusting the CSS styles and JavaScript code according to your requirements.</p>
 <h2 id="examples">Examples</h2>
-<p>Included are several examples including:</p>
+<p>Included are several examples including:
+(./examples/index.html)[&quot;examples&quot;]</p>
 <ul>
 <li>UMD and ESM usage in browser</li>
 <li>Multiuser and multiple instance setups</li>
 <li>Using message history and stats</li>
 <li>Streaming and completions based LLM use</li>
 </ul>
+<h2 id="building-from-source">Building from Source</h2>
+<p>Make sure to run npm install.  Then run npm run build.
+Note that at run time yackbox has no dependancies, but at build time several tools are used for packing and minifying code.</p>
 <h2 id="contributors">Contributors</h2>
 <h2 id="license">License</h2>
 <p>yackbox is licensed under the BSD-2 License.</p>

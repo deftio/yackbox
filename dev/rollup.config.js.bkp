@@ -5,7 +5,7 @@ import { terser } from '@rollup/plugin-terser'; // Import the terser plugin
 
 const extensions = ['.js', '.jsx'];
 
-// Rollup configuration for the yackbox project
+// Rollup configuration for yackbox project
 export default [
   {
     input: 'src/yackbox.js', // src entry code

@@ -51,6 +51,7 @@ Yackbox is highly customizable and can be integrated into various web applicatio
 
 ## Examples
 Included are several examples including:
+(./examples/index.html)["examples"]
 * UMD and ESM usage in browser
 * Multiuser and multiple instance setups
 * Using message history and stats
