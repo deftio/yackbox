@@ -26,7 +26,7 @@ Create a container element in your HTML where you want the chat interface to app
 <div id="chat-container"></div>
 ```
 
-Initialize XLite Chat in your JavaScript code by providing the container element and a callback function for message events:
+Initialize yackbox in your JavaScript code by providing the container element and a callback function for message events:
 ```javascript
 const chat = new yackbox('#chat-container', messageCallback);
 //Use the provided methods to interact with the chat control:
@@ -51,7 +51,7 @@ Yackbox is highly customizable and can be integrated into various web applicatio
 
 ## Examples
 Included are several examples including:
-(./examples/index.html)["examples"]
+[Example Code](./examples/index.html)
 * UMD and ESM usage in browser
 * Multiuser and multiple instance setups
 * Using message history and stats
