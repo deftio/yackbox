@@ -15,25 +15,56 @@
         ul {
             list-style-type: none;
         }
+
         li {
-            left : 0;
+            left: 0;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2 class="mb-8">yackbox examples</h2>
         <p>The following examples can help in getting started with using yackbox</p>
-
-        <div class="md-col-5"><a href="/examples/basic-umd/index.html">Simple Yackbox from local dist</a><br>Quick example of using yackbox from the CDN with random responses</div><br>
-
-        <div class="md-col-5"><a href="/examples/basic-esm/index.html">Simple Yackbox using ESM/ES6 Module syntax</a><br>Quick example of using yackbox by importing it as a module</div><br>
-        
-        <div class="md-col-5"><a href="/examples/ollama-basic-js/simple_ollama.html">Ollama Basic JS</a><br> A simple demo of how to user yackbox for both completions or streaming results</div><br>
-
-        <div class="md-col-5"><a href="/examples/dual-chatrooms/index.html">Dual Chatrooms</a><br>Dual chat rooms on the same screen, each can send messages to each other.</div><br>
-        
-    
+        <div id="examples"></div>
     </div>
+    <script>
+        let ln = (title, url, desc) => {
+            return `<div class="md-col-5"><a href="${url}">${title}</a><br>${desc}</div><br>`;
+        }
+        function getCurrentPath() {
+            // Create a new URL object based on the current window location
+            const url = new URL(window.location.href);
+
+            // Get the pathname from the URL
+            let pathname = url.pathname;
+
+            // Check if the pathname includes a file name by looking for a dot followed by a file extension at the end
+            if (pathname.includes('.')) {
+                // Remove the file name by truncating the pathname at the last slash
+                pathname = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+            }
+
+            // Reconstruct the URL without the filename
+            url.pathname = pathname;
+
+            // Return the modified URL as a string
+            return url.toString();
+        }
+
+        // this hack is so that this works both local host and github pages w/o needing extra libraries
+        let examples = [
+            { title: "Simple Yackbox from local dist", url: "/basic-umd/index.html", desc: "Quick example of using yackbox from the CDN with random responses" },
+            { title: "Simple Yackbox using ESM/ES6 Module syntax", url: "/basic-esm/index.html", desc: "Quick example of using yackbox by importing it as a module" },
+            { title: "Ollama Basic JS", url: "/ollama-basic-js/simple_ollama.html", desc: "A simple demo of how to user yackbox for both completions or streaming results" },
+            { title: "Dual Chatrooms", url: "/dual-chatrooms/index.html", desc: "Dual chat rooms on the same screen, each can send messages to each other." }
+
+        ], content = "";
+        for (i in examples)
+            content += ln(examples[i].title, getCurrentPath()+examples[i].url, examples[i].desc);
+        document.getElementById("examples").innerHTML = content;
+
+    </script>
 </body>
+
 </html>
