@@ -85,27 +85,4 @@ function getOllamaStreamingCallback (userInput, addMsg, appendMsg) {
     .catch(error => {
         console.error('Fetch error:', error);
     });
-
-
-/*
-    // ====
-    return fetch('http://localhost:11434/api/generate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            model: "llama2",
-            prompt: userInput,
-            stream: true
-        })
-    })
-    .then(async response => {console.log(response);await  response.json()})
-    .then(data => {
-        console.log(data.response.trim())
-        fn(data.response.trim(), "Bot", 'left'); // Use the chat instance to display the bot's response
-    })
-    .catch(error => console.error('Error:', error));
-    */
 }
-

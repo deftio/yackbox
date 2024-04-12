@@ -1,6 +1,6 @@
 {
   "name": "yackbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight chatbox control in pure js (both esm and umd) which can be used for chat and llm applications. ",
   "main": "rollup.config.js",
   "type": "module",
