@@ -47,17 +47,19 @@
 
             // Reconstruct the URL without the filename
             url.pathname = pathname;
+            let path = url.toString();
+            path = path.endsWith("/") ? path : path + "/";
 
             // Return the modified URL as a string
-            return url.toString();
+            return path;
         }
 
         // this hack is so that this works both local host and github pages w/o needing extra libraries
         let examples = [
-            { title: "Simple Yackbox from local dist", url: "/basic-umd/index.html", desc: "Quick example of using yackbox from the CDN with random responses" },
-            { title: "Simple Yackbox using ESM/ES6 Module syntax", url: "/basic-esm/index.html", desc: "Quick example of using yackbox by importing it as a module" },
-            { title: "Ollama Basic JS", url: "/ollama-basic-js/simple_ollama.html", desc: "A simple demo of how to user yackbox for both completions or streaming results" },
-            { title: "Dual Chatrooms", url: "/dual-chatrooms/index.html", desc: "Dual chat rooms on the same screen, each can send messages to each other." }
+            { title: "Simple Yackbox from local dist", url: "basic-umd/index.html", desc: "Quick example of using yackbox from the CDN with random responses" },
+            { title: "Simple Yackbox using ESM/ES6 Module syntax", url: "basic-esm/index.html", desc: "Quick example of using yackbox by importing it as a module" },
+            { title: "Ollama Basic JS", url: "ollama-basic-js/simple_ollama.html", desc: "A simple demo of how to user yackbox for both completions or streaming results" },
+            { title: "Dual Chatrooms", url: "dual-chatrooms/index.html", desc: "Dual chat rooms on the same screen, each can send messages to each other." }
 
         ], content = "";
         for (i in examples)
