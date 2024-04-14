@@ -30,6 +30,11 @@ Filter messages
         ? provide examples like regex on content
 SetViewOn/Off (array of message IDs[])
 
+exportAllMessagesAs() // json, jsonl, csv
+
+## persistence / session load/save
+sessionSave()    // save the full session (includes messages + users + stats)
+sessionLoad()    // reload the full session (includes messages + users + stats)
 ## style control
 left / center / right user alignment
 show / hide message entry area (useful for just using as debugging tool where you don't need entry)

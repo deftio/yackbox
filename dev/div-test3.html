@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Test 3</title>
+    <link href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>" rel="icon" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://www.unpkg.com/bitwrench@1.2.16/bitwrench.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 5% ;
+            height: 100%;
+            width: 100%;
+
+        }
+
+        .parent {
+            height: 40vh;
+            width: 40vw;
+        }
+        /*****************************/
+        /* Default styles */
+        .chat-widget {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .title-area {
+            /* Styles for the title area */
+            background-color: lightblue;
+            width: 100%;
+        }
+
+        .messages-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: orange;
+            width : 100%;
+            /* Styles for the messages area */
+        }
+
+        .input-area {
+            /* Styles for the input area */
+            background-color: lightgreen;
+            height: 4em;
+            width: 100%;
+
+        }
+
+        /* Hide classes */
+        .title-area.hidden {
+            display: none;
+        }
+
+        .input-area.hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="parent">
+        <div class="chat-widget">
+            <div class="title-area">
+                <h3>Title Area</h3>
+              
+            </div>
+            <div class="messages-area">
+                Messages Area
+            </div>
+            <div class="input-area">
+                Input Area
+                
+            </div>
+        </div>
+    </div>
+    <br>
+    <button onclick="toggleTitleArea()">Toggle Title Area</button>
+    <button onclick="toggleInputArea()">Toggle Input Area</button>
+    <script>
+        // Get the elements
+        const chatWidget = document.querySelector('.chat-widget');
+        const titleArea = chatWidget.querySelector('.title-area');
+        const messagesArea = chatWidget.querySelector('.messages-area');
+        const inputArea = chatWidget.querySelector('.input-area');
+
+        function toggleTitleArea() {
+            titleArea.classList.toggle('hidden');
+            adjustMessagesAreaHeight();
+        }
+
+        function toggleInputArea() {
+            inputArea.classList.toggle('hidden');
+            adjustMessagesAreaHeight();
+        }
+
+        function adjustMessagesAreaHeight() {
+            const hiddenElements = [...chatWidget.children].filter(child => child.classList.contains('hidden'));
+            const totalHiddenHeight = hiddenElements.reduce((sum, child) => sum + child.offsetHeight, 0);
+            messagesArea.style.height = `calc(100% - ${chatWidget.offsetHeight - totalHiddenHeight}px)`;
+        }
+
+
+        // Attach event listener to handle container resize
+        chatWidget.addEventListener('resize', adjustMessagesAreaHeight);
+        
+        // Call adjustMessagesAreaHeight initially
+        adjustMessagesAreaHeight();
+
+        /* resize version
+        
+        const chatWidget = document.querySelector('.chat-widget');
+        const titleArea = chatWidget.querySelector('.title-area');
+        const messagesArea = chatWidget.querySelector('.messages-area');
+        const inputArea = chatWidget.querySelector('.input-area');
+        
+        function toggleTitleArea() {
+          titleArea.classList.toggle('hidden');
+          adjustMessagesAreaHeight();
+        }
+        
+        function toggleInputArea() {
+          inputArea.classList.toggle('hidden');
+          adjustMessagesAreaHeight();
+        }
+        
+        function adjustMessagesAreaHeight() {
+          const hiddenElements = [...chatWidget.children].filter(child => child.classList.contains('hidden'));
+          const totalHiddenHeight = hiddenElements.reduce((sum, child) => sum + child.offsetHeight, 0);
+          const containerHeight = chatWidget.offsetHeight;
+          messagesArea.style.height = `calc(100% - ${containerHeight - totalHiddenHeight}px)`;
+        }
+        
+        function handleContainerResize() {
+          adjustMessagesAreaHeight();
+        }
+        
+        // Attach event listener to handle container resize
+        window.addEventListener('resize', handleContainerResize);
+        
+        // Call adjustMessagesAreaHeight initially
+        adjustMessagesAreaHeight();
+        
+        */
+
+        //content
+        bw.DOM(messagesArea,bw.loremIpsum(1000));
+    </script>
+
+</body>
+
+</html>
