@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Div Test 3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>"
         rel="icon" />
@@ -28,6 +29,7 @@
             width: 40vw;
         }
 
+        /* these are not part of the widget, just for the demo test */
         .system-btn {
             padding: 8px 12px;
             background-color: #918434;
@@ -37,15 +39,70 @@
             cursor: pointer;
             white-space: nowrap;
         }
+
         /*****************************/
         /* Default styles */
-        .chat-widget {
+        .yackbox-base {
             display: flex;
             flex-direction: column;
             height: 100%;
             width: 100%;
             min-width: 200px;
             min-height: 200px;
+        }
+
+        .yackbox-title-area {
+            width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .yackbox-messages-area {
+            flex-grow: 1;
+            padding: 8px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        .yackbox-message {
+            padding : 2px;
+        }
+
+        .yackbox-input-area {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            min-height: 56px;
+            height: 4em;
+            width: 100%;
+        }
+
+
+        .yackbox-text-entry-box {
+            flex-grow: 1;
+            min-height: 40px;
+            /* Adjust as needed */
+            resize: none;
+            padding: 8px;
+        }
+
+        .yackbox-title-area.hidden {
+            display: none;
+        }
+
+        .yackbox-input-area.hidden {
+            display: none;
+        }
+
+        .yackbox-send-button {
+            margin-left: 8px;
+            padding: 8px 12px;
+            height: 100%;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* set of themes to highlight compontents of yackbox */
+        .yackbox-theme-debug {
             /* Styles for the chat widget */
             border: 1px solid black;
             border-radius: 10px;
@@ -53,68 +110,92 @@
             background-color: mediumorchid;
         }
 
-        .title-area {
-            /* Styles for the title area */
+        .yackbox-theme-debug .yackbox-title-area {
             background-color: lightblue;
-            width: 100%;
-            padding-left: 8px;
-            padding-right: 8px;
-
         }
 
-        .messages-area {
-            flex-grow: 1;
-            padding: 8px;
-
-            overflow-y: auto;
-            background-color: orange;
-            width: 100%;
-            /* Styles for the messages area */
+        .yackbox-theme-debug .yackbox-messages-area {
+            background-color: lightsalmon;
         }
 
-        .input-area {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            min-height: 56px;
-            /* Adjust as needed */
-            /* Styles for the input area */
+        .yackbox-theme-debug .yackbox-message-1 {
+            background-color: lightseagreen;
+            color : #eee;
+        }
+
+        .yackbox-theme-debug .yackbox-message-2 {
+            background-color: lightpink;
+            color : #444;
+        }
+
+        .yackbox-theme-debug .yackbox-input-area {
             background-color: lightgreen;
-            height: 4em;
-            width: 100%;
-
         }
 
-        .text-entry {
-            flex-grow: 1;
-            min-height: 40px;
-            /* Adjust as needed */
-            resize: none;
-            padding: 8px;
+        .yackbox-theme-debug .yackbox-text-entry-box {
+            background-color: #eee;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
         }
 
-        .send-button {
-            margin-left: 8px;
-            padding: 8px 12px;
-            height: 100%;
+        .yackbox-theme-debug .yackbox-send-button {
             background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 4px;
-            cursor: pointer;
-            white-space: nowrap;
         }
 
-        /* Hide classes */
-        .title-area.hidden {
-            display: none;
+        /* set of themes to highlight compontents of yackbox */
+        .yackbox-theme-dark {
+            /* Styles for the chat widget */
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #444;
         }
 
-        .input-area.hidden {
-            display: none;
+        .yackbox-theme-dark .yackbox-title-area {
+            background-color: #444;
+            color: #eee;
+        }
+
+        .yackbox-theme-dark .yackbox-messages-area {
+            background-color: #444;
+            border: 1px solid #ccc;
+            color: #eee;
+            margin-bottom: 2px;
+            border-radius: 4px;
+        }
+
+        .yackbox-theme-dark .yackbox-message-1 {
+            background-color: #555;
+            color : #eee;
+        }
+
+        .yackbox-theme-dark .yackbox-message-2 {
+            background-color: #333;
+            color : #eee;
+        }
+
+        .yackbox-theme-dark .yackbox-input-area {
+            background-color: lightgray;
+            border-radius: 4px;
+        }
+
+        .yackbox-theme-dark .yackbox-text-entry-box {
+            background-color: #444;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .yackbox-theme-dark .yackbox-send-button {
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 4px;
         }
     </style>
 
@@ -122,18 +203,19 @@
 
 <body>
     <h2>Component Styles and Resize Checks</h2>
-    <p>This is a test of a chat widget with a title area, messages area, and input area. The title area and input area can be hidden.</p>
+    <p>This is a test of a themeable chat widget with a title area, messages area, and input area. The title area and input area
+        can be hidden.</p>
     <div class="parent">
-        <div class="chat-widget">
-            <div class="title-area">
-               <span style="font-size: 1.5em; font-weight: 600;">Title Area</span>
+        <div class="yackbox-base yackbox-theme-debug">
+            <div class="yackbox-title-area">
+                <span style="font-size: 1.5em; font-weight: 600;">Title Area</span>
             </div>
-            <div class="messages-area">
-                Messages Area
+            <div class="yackbox-messages-area">
+                <!-- Messages will be added here -->
             </div>
-            <div class="input-area">
-                <textarea class="text-entry"></textarea>
-                <button onclick="doSend()" class="send-button">Send</button>
+            <div class="yackbox-input-area">
+                <textarea class="yackbox-text-entry-box"></textarea>
+                <button onclick="doSend()" class="yackbox-send-button">Send</button>
             </div>
         </div>
     </div>
@@ -141,12 +223,12 @@
     <button class="system-btn" onclick="toggleTitleArea()">Hide Title</button>
     <button class="system-btn" onclick="toggleInputArea()">Hide Input</button>
     <script>
-        const chatWidget = document.querySelector('.chat-widget');
-        const titleArea = chatWidget.querySelector('.title-area');
-        const messagesArea = chatWidget.querySelector('.messages-area');
-        const inputArea = chatWidget.querySelector('.input-area');
-        const textEntry = inputArea.querySelector('.text-entry');
-        const sendButton = inputArea.querySelector('.send-button');
+        const chatWidget = document.querySelector('.yackbox-base');
+        const titleArea = chatWidget.querySelector('.yackbox-title-area');
+        const messagesArea = chatWidget.querySelector('.yackbox-messages-area');
+        const inputArea = chatWidget.querySelector('.yackbox-input-area');
+        const textEntry = inputArea.querySelector('.yackbox-text-entry-box');
+        const sendButton = inputArea.querySelector('.yackbox-send-button');
 
         function toggleTitleArea() {
             titleArea.classList.toggle('hidden');
@@ -180,26 +262,32 @@
         function doSend() {
             const message = textEntry.value.trim();
             if (message) {
-                // Add the message to the messages area
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                if (messagesArea.children.length % 2 === 1) {
-                    messageDiv.style.backgroundColor = 'lightgray';
-                }
-                messageDiv.textContent = message;
-                messagesArea.appendChild(messageDiv);
-                messagesArea.lastChild.scrollIntoView()
-
-                textEntry.value = '';
-                adjustMessagesAreaHeight();
+                addMessage(message);
             }
-        }   
+        }
+        function addMessage(message) {
+            // Add the message to the messages area
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('yackbox-message');
+            if (messagesArea.children.length % 2 === 1) {
+                messageDiv.classList.add('yackbox-message-1');
+            }
+            else {
+                messageDiv.classList.add('yackbox-message-2');
+            }
+            messageDiv.textContent = message;
+            messagesArea.appendChild(messageDiv);
+            messagesArea.lastChild.scrollIntoView()
+
+            textEntry.value = '';
+            adjustMessagesAreaHeight();
+        }
         window.addEventListener('resize', handleContainerResize);
         adjustMessagesAreaHeight();
         adjustSendButtonWidth();
 
-        //content
-        bw.DOM(messagesArea, "<div class='message'>"+bw.loremIpsum(1000)+"</div>");
+        // starter content
+        addMessage( bw.loremIpsum(1000) );
     </script>
 
 </body>
