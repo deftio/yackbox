@@ -36,6 +36,31 @@ function _createClass(Constructor, protoProps, staticProps) {
   });
   return Constructor;
 }
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
 
 var yackbox = /*#__PURE__*/function () {
   /**
@@ -48,13 +73,22 @@ var yackbox = /*#__PURE__*/function () {
     _classCallCheck(this, yackbox);
     this.container = typeof div == "string" ? document.querySelector(div) : div instanceof HTMLElement ? div : null;
     if (!this.container) {
-      console.error("Invalid container element for yackbox, creating a new one.");
+      console.error("Invalid container element for yackbox, creating a new element.");
       this.container = document.createElement('div');
     }
+    // title
+    this.title = "Chat";
+    this.titleAlignment = "center";
+
+    // user add
     this.userName = "You";
     this.userAlignment = "left";
+
+    // callback functions
     this.completionCallback = completionCallback ? completionCallback : function () {};
     this.streamCallback = streamCallback ? streamCallback : function () {};
+
+    // history
     this.messages = [];
     this.echo = true; // echo user input
     this.users = {};
@@ -112,6 +146,39 @@ var yackbox = /*#__PURE__*/function () {
       this.echo = echo ? true : false;
       return this.echo;
     }
+
+    /**
+     * Adjusts the height of the messages area to fit the chat widget.
+     * This method should be called whenever the chat widget is resized.
+     */
+  }, {
+    key: "adjustMessagesAreaHeight",
+    value: function adjustMessagesAreaHeight() {
+      var chatWidget = this.container;
+      var hiddenElements = _toConsumableArray(chatWidget.children).filter(function (child) {
+        return child.classList.contains('hidden');
+      });
+      var totalHiddenHeight = hiddenElements.reduce(function (sum, child) {
+        return sum + child.offsetHeight;
+      }, 0);
+      var containerHeight = chatWidget.offsetHeight;
+      this.messagesContainer.style.height = "calc(100% - ".concat(containerHeight - totalHiddenHeight, "px)");
+    }
+  }, {
+    key: "handleContainerResize",
+    value: function handleContainerResize() {
+      adjustMessagesAreaHeight();
+      adjustSendButtonWidth();
+    }
+  }, {
+    key: "adjustSendButtonWidth",
+    value: function adjustSendButtonWidth() {
+      var submitButtonText = this.submitButton.textContent.trim();
+      var fontSize = parseFloat(getComputedStyle(this.submitButton).fontSize);
+      var minWidth = fontSize * submitButtonText.length + 16; // Adjust the multiplier as needed
+      this.submitButton.style.minWidth = "".concat(minWidth, "px");
+    }
+
     /**
     Shows or hides the input area of the chat.
     @param {boolean} show - True to show the input area, false to hide it.
@@ -120,13 +187,27 @@ var yackbox = /*#__PURE__*/function () {
     key: "showInputArea",
     value: function showInputArea(show) {
       if (show) {
-        this.inputAreaBox.style.display = "";
-        this.messagesContainer.style.height = "88%;";
+        this.inputAreaBox.style.display = "flex";
+        this.inputAreaBox.classList.remove('hidden');
       } else {
         this.inputAreaBox.style.display = "none";
-        this.messagesContainer.style.height = "98%";
+        this.inputAreaBox.classList.add('hidden');
       }
+      this.adjustMessagesAreaHeight();
     }
+  }, {
+    key: "showTitleArea",
+    value: function showTitleArea(show) {
+      if (show) {
+        this.titleArea.style.display = "flex";
+        this.titleArea.classList.remove('hidden');
+      } else {
+        this.titleArea.style.display = "none";
+        this.titleArea.classList.add('hidden');
+      }
+      this.adjustMessagesAreaHeight();
+    }
+
     /**
     Adds a new message to the chat.
     @param {string} content - The content of the message.
@@ -248,12 +329,32 @@ var yackbox = /*#__PURE__*/function () {
     key: "initUI",
     value: function initUI() {
       var _this = this;
-      this.container.innerHTML = "<div class=\"yackbox-container\"> <div class=\"yackbox-messages\"></div> <div class=\"yackbox-input-area\"> <textarea class=\"yackbox-input-textbox\" placeholder=\"Type here...\"></textarea> <div class=\"yackbox-sep\"></div> <button class=\"yackbox-submit\">Send</button> </div> </div>";
-      this.messagesContainer = this.container.querySelector('.yackbox-messages');
+      this.container.innerHTML = "<div class=\"yackbox-base yackbox-theme-light\"> \n            <div class=\"yackbox-title-area\"></div>\n            <div class=\"yackbox-messages-area\"></div> \n            <div class=\"yackbox-input-area\"> \n                <textarea class=\"yackbox-input-textbox\" placeholder=\"Type here...\"></textarea> \n                <button class=\"yackbox-input-send-btn\">Send</button>\n            </div>\n        </div>";
+      this.yackboxContainer = this.container.querySelector('.yackbox-base');
+      this.titleArea = this.container.querySelector('.yackbox-title-area');
+      this.titleArea.innerHTML = "<h3>" + this.title + "</h3>";
+
+      //setStyles (this.titleArea, this.baseStyles["yackbox-title-area"]);
+
+      this.messagesContainer = this.container.querySelector('.yackbox-messages-area');
+      //setStyles(this.messagesContainer, this.baseStyles["yackbox-messages-area"]);
+
       this.messagesContainer.scrollIntoView(false);
       this.inputAreaBox = this.container.querySelector('.yackbox-input-area');
+      //setStyles(this.inputAreaBox, this.baseStyles["yackbox-input-area"]);
+
       this.inputTextArea = this.container.querySelector('.yackbox-input-textbox');
-      this.submitButton = this.container.querySelector('.yackbox-submit');
+      //setStyles(this.inputTextArea, this.baseStyles["yackbox-input-textbox"]);
+
+      this.submitButton = this.container.querySelector('.yackbox-input-send-btn');
+      //setStyles(this.submitButton, this.baseStyles["yackbox-input-send-btn"]);
+
+      // now we add the base styles for the chat container and sub elements
+      // set base styles for the chat container.  NOTE this is done in js so that we can have 
+      // multiple instances of the chatbox on the same page with different styles
+      // see yaclbox.css for the default styles
+
+      //===================================================================================
       // Add event listener to the chat input textarea
       var inputTextarea = this.inputTextArea;
       // memoize callback fn
@@ -291,6 +392,12 @@ var yackbox = /*#__PURE__*/function () {
       this.submitButton.addEventListener('click', function () {
         handleUserSubmit();
       });
+      this.container.addEventListener('resize', function () {
+        handleContainerResize();
+      });
+      this.adjustMessagesAreaHeight();
+      this.adjustSendButtonWidth();
+      this.showTitleArea(false);
     }
     /**
     Returns a portion of the message history.

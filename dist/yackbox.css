@@ -1,101 +1,246 @@
-.yackbox-container {
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    box-sizing:border-box;
-  }
-  
-  .yackbox-messages {
-    overflow-y: auto;
-    border-radius: 5px;
-    padding: 5px;
-    height: calc(100% - 3em);
-    top: 5px;
-    left: 5px;
-    right: 5px;
-  }
-  
-  .yackbox-message {
-    position: relative;
-    width: 95%;
-  }
-  .yackbox-content {
-    width: 95%;
-    padding-bottom: 0.5em;
-    border: 1px solid orange;
-  }
-  
-  
+/* Yackbox CSS  and built-in themes */
 
-  /* overall container */
-  .yackbox-input-area {
-    width : auto;
-    display: flex;
-    height: 2.5em;
-    padding-top: 5px;
-    padding-bottom: 1px;
-  }
-  
-  
-  
-  /* typing area */
-  .yackbox-input-textbox {
-    box-sizing: border-box;
-    height: 100%;
-    border-radius: 4px;
-    border: 1px solid hotpink;
-    width: 87%;
-    resize: none;
-  }
-  
-  /* debug */
-  /*
-  .yackbox-messages { border: 1px solid #d51414; }
-  .yackbox-content  {  border: 1px solid orange; }
-  .yackbox-input-area { border: 1px solid darkmagenta; }
-  .yackbox-username { border: 1px solid teal;}
-  .yackbox-input-textbox { border: 1px solid #ccc;}
-  .yackbox-input-area {  border: 1px solid darkmagenta;}
-  */
-  
-  /* space in between */
-  .yackbox-sep {
-    height: 100%;
-    width : 1%;
-  }
-  /* submit button */
-  .yackbox-submit {
-    cursor: pointer;
-    border: 1px solid #873f3fd2;
-    background-color: #f0f0f0;
-    height: 100%;
-    width: 12%;
-    border-radius: 4px;
-  }
-  
-  .yackbox-left {
-    text-align: left;
-    white-space: pre-wrap;
-    width: auto;
-    padding-right: 5%;
-  }
-  .yackbox-right {
-    text-align: right;
-    white-space: pre-wrap;
-    width: auto;
-    padding-left: 5%;
-  }
-  .yackbox-center {
-    text-align: center;
-    white-space: pre-wrap;
-    width: auto;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-  }
-  
-  .yackbox-username {
-    border-radius: 4px;
-    font-weight: bold;
-  }
-  
-  
+/* core css - probably should not be modified */
+.yackbox-base {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  box-sizing: border-box !important;
+}
+
+.yackbox-title-area {
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box !important;
+
+}
+
+.yackbox-messages-area {
+  flex-grow: 1;
+  padding: 8px;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box !important;
+
+}
+
+.yackbox-message {
+  padding: 2px;
+}
+
+.yackbox-input-area {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  min-height: 56px;
+  height: 4em;
+  width: 100%;
+  box-sizing: border-box !important;
+
+}
+
+
+.yackbox-input-textbox {
+  flex-grow: 1;
+  min-height: 40px;
+  resize: none;
+  padding: 4px;
+}
+
+.yackbox-input-send-btn {
+  margin-left: 8px;
+  padding: 8px 12px;
+  height: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.yackbox-title-area.hidden {
+  display: none;
+}
+
+.yackbox-input-area.hidden {
+  display: none;
+}
+
+/***********************************************************/
+/*** Themes - modify these to change the look of yackbox ***/
+/* set of themes to highlight compontents of yackbox       */
+
+/* yackbox debug theme has high contrast colors to show components - not recommended for production */
+.yackbox-theme-debug {
+  /* Styles for the chat widget */
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: mediumorchid;
+}
+
+.yackbox-theme-debug .yackbox-title-area {
+  background-color: lightblue;
+}
+
+.yackbox-theme-debug .yackbox-messages-area {
+  background-color: lightsalmon;
+}
+
+.yackbox-theme-debug .yackbox-message-1 {
+  background-color: lightseagreen;
+  color: #eee;
+}
+
+.yackbox-theme-debug .yackbox-message-2 {
+  background-color: lightpink;
+  color: #444;
+}
+
+.yackbox-theme-debug .yackbox-input-area {
+  background-color: lightgreen;
+}
+
+.yackbox-theme-debug .yackbox-input-textbox {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.yackbox-theme-debug .yackbox-input-send-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+/* yackbox light theme has light colors for components */
+.yackbox-theme-light {
+  /* Styles for the chat widget */
+ /* border: 1px solid black; */
+  background-color: #eeeeee;
+  border-radius: 10px;
+  padding: 5px;
+ 
+}
+
+.yackbox-theme-light .yackbox-title-area {
+  background-color: lightblue;
+}
+
+.yackbox-theme-light .yackbox-messages-area {
+}
+
+.yackbox-theme-light .yackbox-message-1 {
+  background-color: rgb(101, 101, 101);
+  color: #eee;
+}
+
+.yackbox-theme-light .yackbox-message-2 {
+  background-color: rgb(125, 125, 125);
+  color: #444;
+}
+
+.yackbox-theme-light .yackbox-input-area {
+  background-color: lightsteelblue;
+  border-radius: 4px;
+
+}
+
+.yackbox-theme-light .yackbox-input-textbox {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.yackbox-theme-light .yackbox-input-send-btn {
+  background-color: #4c84af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+/*****************************************************/
+/* set of themes to highlight compontents of yackbox */
+.yackbox-theme-dark {
+  /* Styles for the chat widget */
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #444;
+}
+
+.yackbox-theme-dark .yackbox-title-area {
+  background-color: #444;
+  color: #eee;
+}
+
+.yackbox-theme-dark .yackbox-messages-area {
+  background-color: #444;
+  border: 1px solid #ccc;
+  color: #eee;
+  margin-bottom: 2px;
+  border-radius: 4px;
+}
+
+.yackbox-theme-dark .yackbox-message-1 {
+  background-color: #555;
+  color: #eee;
+}
+
+.yackbox-theme-dark .yackbox-message-2 {
+  background-color: #333;
+  color: #eee;
+}
+
+.yackbox-theme-dark .yackbox-input-area {
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.yackbox-theme-dark .yackbox-input-textbox {
+  background-color: #444;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.yackbox-theme-dark .yackbox-input-send-btn {
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+/*** to do move these out of css and into js ***/
+
+.yackbox-left {
+  text-align: left;
+  white-space: pre-wrap;
+  width: auto;
+  padding-right: 5%;
+}
+
+.yackbox-right {
+  text-align: right;
+  white-space: pre-wrap;
+  width: auto;
+  padding-left: 5%;
+}
+
+.yackbox-center {
+  text-align: center;
+  white-space: pre-wrap;
+  width: auto;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+}
+
+.yackbox-username {
+  border-radius: 4px;
+  font-weight: bold;
+}

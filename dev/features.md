@@ -6,8 +6,12 @@ chat apps
 monitoring / debugging chat  and llm apps
 used as a log viewer (hide entry area)
 
+## workflow
+
 ## stand alone js
 can be used in any "div", is responsive
+
+
 
 ## multi user
 Supports multiple users participating

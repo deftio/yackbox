@@ -9,9 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-    <link
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>"
-        rel="icon" />
+    <link href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>" rel="icon" />
 
     <script src="https://www.unpkg.com/bitwrench@1.2.16/bitwrench.min.js"></script>
     <style>
@@ -27,6 +25,7 @@
         .parent {
             height: 40vh;
             width: 40vw;
+            border: 2px solid rgb(221, 32, 180);
         }
 
         /* these are not part of the widget, just for the demo test */
@@ -63,8 +62,9 @@
             overflow-y: auto;
             width: 100%;
         }
+
         .yackbox-message {
-            padding : 2px;
+            padding: 2px;
         }
 
         .yackbox-input-area {
@@ -77,12 +77,19 @@
         }
 
 
-        .yackbox-text-entry-box {
+        .yackbox-input-textbox {
             flex-grow: 1;
             min-height: 40px;
-            /* Adjust as needed */
             resize: none;
             padding: 8px;
+        }
+
+        .yackbox-input-send-btn {
+            margin-left: 8px;
+            padding: 8px 12px;
+            height: 100%;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
         .yackbox-title-area.hidden {
@@ -93,13 +100,6 @@
             display: none;
         }
 
-        .yackbox-send-button {
-            margin-left: 8px;
-            padding: 8px 12px;
-            height: 100%;
-            cursor: pointer;
-            white-space: nowrap;
-        }
 
         /* set of themes to highlight compontents of yackbox */
         .yackbox-theme-debug {
@@ -120,26 +120,26 @@
 
         .yackbox-theme-debug .yackbox-message-1 {
             background-color: lightseagreen;
-            color : #eee;
+            color: #eee;
         }
 
         .yackbox-theme-debug .yackbox-message-2 {
             background-color: lightpink;
-            color : #444;
+            color: #444;
         }
 
         .yackbox-theme-debug .yackbox-input-area {
             background-color: lightgreen;
         }
 
-        .yackbox-theme-debug .yackbox-text-entry-box {
+        .yackbox-theme-debug .yackbox-input-textbox {
             background-color: #eee;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
         }
 
-        .yackbox-theme-debug .yackbox-send-button {
+        .yackbox-theme-debug .yackbox-input-send-btn {
             background-color: #4caf50;
             color: white;
             border: none;
@@ -170,12 +170,12 @@
 
         .yackbox-theme-dark .yackbox-message-1 {
             background-color: #555;
-            color : #eee;
+            color: #eee;
         }
 
         .yackbox-theme-dark .yackbox-message-2 {
             background-color: #333;
-            color : #eee;
+            color: #eee;
         }
 
         .yackbox-theme-dark .yackbox-input-area {
@@ -183,7 +183,7 @@
             border-radius: 4px;
         }
 
-        .yackbox-theme-dark .yackbox-text-entry-box {
+        .yackbox-theme-dark .yackbox-input-textbox {
             background-color: #444;
             border: 2px solid #ccc;
             border-radius: 4px;
@@ -191,7 +191,7 @@
             color: #ddd;
         }
 
-        .yackbox-theme-dark .yackbox-send-button {
+        .yackbox-theme-dark .yackbox-input-send-btn {
             background-color: #444;
             color: white;
             border: none;
@@ -203,7 +203,8 @@
 
 <body>
     <h2>Component Styles and Resize Checks</h2>
-    <p>This is a test of a themeable chat widget with a title area, messages area, and input area. The title area and input area
+    <p>This is a test of a themeable chat widget with a title area, messages area, and input area. The title area and
+        input area
         can be hidden.</p>
     <div class="parent">
         <div class="yackbox-base yackbox-theme-debug">
@@ -214,8 +215,8 @@
                 <!-- Messages will be added here -->
             </div>
             <div class="yackbox-input-area">
-                <textarea class="yackbox-text-entry-box"></textarea>
-                <button onclick="doSend()" class="yackbox-send-button">Send</button>
+                <textarea class="yackbox-input-textbox"></textarea>
+                <button onclick="doSend()" class="yackbox-input-send-btn">Send</button>
             </div>
         </div>
     </div>
@@ -227,8 +228,8 @@
         const titleArea = chatWidget.querySelector('.yackbox-title-area');
         const messagesArea = chatWidget.querySelector('.yackbox-messages-area');
         const inputArea = chatWidget.querySelector('.yackbox-input-area');
-        const textEntry = inputArea.querySelector('.yackbox-text-entry-box');
-        const sendButton = inputArea.querySelector('.yackbox-send-button');
+        const textEntry = inputArea.querySelector('.yackbox-input-textbox');
+        const sendButton = inputArea.querySelector('.yackbox-input-send-btn');
 
         function toggleTitleArea() {
             titleArea.classList.toggle('hidden');
@@ -287,7 +288,7 @@
         adjustSendButtonWidth();
 
         // starter content
-        addMessage( bw.loremIpsum(1000) );
+        addMessage(bw.loremIpsum(1000));
     </script>
 
 </body>

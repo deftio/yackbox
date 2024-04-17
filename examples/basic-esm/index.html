@@ -1,57 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        html,body {
-          box-sizing:border-box;
-          font-family: sans-serif;
-          height: 100%;
-          width: 100%;
-        }
-        body {
-          margin : 4%;
-        }
-        #chat-container {
-          height: 400px;
-          width : 600px;
-          border : 2px solid rgb(79, 9, 64);
-          border-radius: 5px;
-        }
-      </style>
-     <!-- Include  Yackbox CSS file -->
-    <link rel="stylesheet" href="../../dist/yackbox.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>" rel="icon" />
+ 
+  <style>
+  
+    html,
+    body {
+      font-family: sans-serif;
+      height: 100%;
+      width: 100%;
+      margin: 4%;
+    }
 
-    <title>Yackbox Example</title>
+    #chat-container {
+      height: 50vh;
+      width: 40vw;
+      border: 2px solid rgb(79, 9, 64);
+      border-radius: 5px;
+      box-sizing: border-box !important;
+    }
+  </style>
+  <!-- Include  Yackbox CSS file -->
+  <link rel="stylesheet" href="../../dist/yackbox.css">
+
+  <title>Yackbox Example</title>
 </head>
+
 <body>
-    <h1 class="mb-4">YackBox Demo</h1>
-        <p>
-        yackbox.js is a simple (pure vanilla) javascript chat control for testing simple chat and AI bot applications.
-        </p>
-    <!-- Container for the chat interface -->
-      
-    <div id="chat-container" style="width: 400px; height: 300px; border: 1px solid #000;">
-        <!-- Chatbox will load here -->
-    </div>
+  <h1 class="mb-4">YackBox Demo</h1>
+  <p>
+    yackbox.js is a simple (pure vanilla) javascript chat control for testing simple chat and AI bot applications.
+  </p>
+  <!-- Container for the chat interface -->
 
-    <script type="module">
-        import yackbox from '../../dist/yackbox.esm.js';
+  <div id="chat-container">
+    <!-- Chatbox will load here -->
+  </div>
 
-        // Callback function for when the chat is submitted
-        function completionCallback(message) {
-            console.log("Chat submitted:", message);
-        }
+  <script type="module">
+    import yackbox from '../../src/yackbox.js';
 
-        // Create a new instance of yackbox
-        const chat = new yackbox('#chat-container', completionCallback);
+    // Callback function for when the chat is submitted
+    function completionCallback(message) {
+      console.log("Chat submitted:", message);
+    }
 
-        // Add a message to the chatbox (example usage)
-        chat.addMessage("Welcome to Yackbox!", "System"); 
+    // Create a new instance of yackbox
+    const chat = new yackbox('#chat-container', completionCallback);
 
-        // add to the window so we can inspect it in the console
-        window.chat = chat;  // this is not neceessary for production code
-    </script>
+    // Add a message to the chatbox (example usage)
+    chat.addMessage("Welcome to Yackbox!", "System");
+
+    // add to the window so we can inspect it in the console
+    window.chat = chat;  // this is not neceessary for production code
+  </script>
 </body>
+
 </html>
