@@ -54,3 +54,34 @@ npm install  etc
 rollup, terser, etc
 
 Note while rollup and other tools are used for bundling / packaging yackbox doesn't have any dependacies.
+
+## 
+
+config {
+    styles : {
+        title
+        messageContainer
+        message
+        entryContainer
+        textEntry
+        submitBtn
+    }
+    features : {
+        onSubmitCallback : fn (text, this)
+        onMessageCallback : fn (text, this)
+    }
+}
+chat = new yackbox({DOMEl, config})
+chat.addMessageRaw ({userString, content, alignment}) : msgID   # pure HTML inputs
+
+chat.updateMessage ({messageID, messageContent }) 
+chat.addMessage ({userID, messageContent})
+
+chat.showTimestamps (true/false)
+chat.addUser({displayName, metadata, role, displayHTML, cssClass })
+chat.updateUser (userID, {})
+chat.removeUser (userID)
+
+chat.getMessageHistoryRange(n,m) # messages only
+chat.getMessageHistoryFull() # messages only (copy)
+chat.getFullLog()  # includes system messages such as "user X entered the chat"

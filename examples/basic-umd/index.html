@@ -17,13 +17,16 @@
         width: 100%;
       }
       body {
-        margin : 4%;
+        margin : 0 auto;
+        width : 90%;
+        display: block;
       }
       #chat-container {
         height: 60vh;
-        width : 50vw;
-        border : 2px solid rgb(221, 32, 180);
+        width : 100%;
+        /* border : 2px solid rgb(221, 32, 180);
         border-radius: 5px;
+        */
       }
       .systemButton {
         padding: 8px 12px;
@@ -56,6 +59,8 @@
     chat.addMessage("short Message","Bar","right")
     chat.addMessage(longString,"Foo","left")
     chat.addMessage(longString,"Bar","right")
+    chat.addMessage(longString,"Mid","Center")
+
     chat.addMessage(lorem(300),"Bar","right")
     
     function cb(msg) {

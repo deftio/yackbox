@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        type="image/gif">
+    <title>Streaming Example</title>
+    <script>
+        let x = [];
+        function sendText() {
+            var text = document.getElementById('text').value;
+            x= [];
+            var source = new EventSource('/stream/' + encodeURIComponent(text));
+            source.onmessage = function(event) {
+                if (event.data === '[DONE]') {
+                    source.close();
+                    console.log("Done")
+                    return;
+                }
+                let s = event.data;
+                console.log(s);
+                x.push([s,performance.now()]);
+                document.getElementById('token').innerHTML = s;
+                document.getElementById('output').innerHTML += s;
+            };
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="text" id="text" />
+    <button onclick="sendText()">Send</button><div id="token"></div>
+    <div id="output"></div>
+</body>
+
+</html>
