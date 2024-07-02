@@ -78,9 +78,11 @@ chat.updateMessage ({messageID, messageContent })
 chat.addMessage ({userID, messageContent})
 
 chat.showTimestamps (true/false)
-chat.addUser({displayName, metadata, role, displayHTML, cssClass })
-chat.updateUser (userID, {})
-chat.removeUser (userID)
+chat.userAdd({displayName,  metadata, role, displayHTML, cssClass }) : id
+chat.userGet(id) : {displayName,  metadata, role, displayHTML, cssClass }
+chat.userUpdate (userID, {}) : {result success|fail}
+chat.userRemove (userID) : {result success|fail, msg []}
+chat.userList() : [{userID, role, cssClass}]
 
 chat.getMessageHistoryRange(n,m) # messages only
 chat.getMessageHistoryFull() # messages only (copy)
