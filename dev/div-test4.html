@@ -236,23 +236,39 @@
         </div>
     </div>
     <br>
-    <button class="system-btn" onclick="toggleTitleArea()">Hide Title</button>
-    <button class="system-btn" onclick="toggleInputArea()">Hide Input</button>
+    <button class="system-btn" onclick="titleAreaToggle()">Hide Title</button>
+    <button class="system-btn" onclick="inputAreaToggle()">Hide Input</button>
     <script>
-        const chatWidget = document.querySelector('.yackbox-base');
-        const titleArea = chatWidget.querySelector('.yackbox-title-area');
-        const messagesArea = chatWidget.querySelector('.yackbox-messages-area');
-        const inputArea = chatWidget.querySelector('.yackbox-input-area');
-        const textEntry = inputArea.querySelector('.yackbox-input-textbox');
-        const sendButton = inputArea.querySelector('.yackbox-input-send-btn');
+        const chatWidget    = document.querySelector('.yackbox-base');
+        const titleArea     = chatWidget.querySelector('.yackbox-title-area');
+        const messagesArea  = chatWidget.querySelector('.yackbox-messages-area');
+        const inputArea     = chatWidget.querySelector('.yackbox-input-area');
+        const textEntry     = inputArea.querySelector('.yackbox-input-textbox');
+        const sendButton    = inputArea.querySelector('.yackbox-input-send-btn');
 
-        function toggleTitleArea() {
+        function titleAreaToggle() {
             titleArea.classList.toggle('hidden');
             adjustMessagesAreaHeight();
         }
+        function titleAreaShow() {
+            titleArea.classList.remove('hidden');
+            adjustMessagesAreaHeight();
+        }
+        function titleAreaHide() {
+            titleArea.classList.add('hidden');
+            adjustMessagesAreaHeight();
+        }
 
-        function toggleInputArea() {
+        function inputAreaToggle() {
             inputArea.classList.toggle('hidden');
+            adjustMessagesAreaHeight();
+        }
+        function inputAreaShow() {
+            inputArea.classList.remove('hidden');
+            adjustMessagesAreaHeight();
+        }
+        function inputAreaHide() {
+            inputArea.classList.add('hidden');
             adjustMessagesAreaHeight();
         }
 
@@ -266,6 +282,7 @@
         function handleContainerResize() {
             adjustMessagesAreaHeight();
             adjustSendButtonWidth();
+            console.log('Container resized');
         }
 
         function adjustSendButtonWidth() {
@@ -334,7 +351,9 @@
             textEntry.value = '';
             adjustMessagesAreaHeight();
         }
-        window.addEventListener('resize', handleContainerResize);
+        chatWidget.addEventListener('resize', handleContainerResize);
+
+        //window.addEventListener('resize', handleContainerResize);
         adjustMessagesAreaHeight();
         adjustSendButtonWidth();
 
