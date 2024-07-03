@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Test 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' style='fill:blue'>&#x1F4AC;</text></svg>"
+        rel="icon" />
+    <script src="https://www.unpkg.com/bitwrench@1.2.16/bitwrench.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 5%;
+            height: 100%;
+            width: 100%;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+        }
+
+        .parent {
+            height: 50vh;
+            width: 30vw;
+            display: inline-block;
+        }
+
+        /* these are not part of the widget, just for the demo test */
+        .system-btn {
+            padding: 8px 12px;
+            background-color: #918434;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* Base Styles - Affect behavior so change with char */
+        .yackbox-base {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            min-width: 200px;
+            min-height: 200px;
+        }
+
+        .yackbox-title-area {
+            width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .yackbox-messages-area {
+            flex-grow: 1;
+            padding: 8px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .yackbox-message {
+            padding: 2px;
+            white-space: pre-wrap;
+        }
+
+        .yackbox-input-area {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            min-height: 56px;
+            height: 4em;
+            width: 100%;
+        }
+
+        .yackbox-input-textbox {
+            flex-grow: 1;
+            min-height: 40px;
+            resize: none;
+            padding: 8px;
+        }
+
+        .yackbox-input-send-btn {
+            margin-left: 8px;
+            padding: 8px 12px;
+            height: 100%;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* ***************************************** */
+        /* Theme styles : debug                      */
+        .yackbox-theme-debug {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: mediumorchid;
+        }
+
+        .yackbox-theme-debug .yackbox-title-area {
+            background-color: lightblue;
+            color: #333;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        .yackbox-theme-debug .yackbox-messages-area {
+            background-color: lightsalmon;
+        }
+
+        .yackbox-theme-debug .yackbox-message-1 {
+            background-color: lightseagreen;
+            color: #eee;
+        }
+
+        .yackbox-theme-debug .yackbox-message-2 {
+            background-color: lightpink;
+            color: #444;
+        }
+
+        .yackbox-theme-debug .yackbox-input-area {
+            background-color: lightgreen;
+        }
+
+        .yackbox-theme-debug .yackbox-input-textbox {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .yackbox-theme-debug .yackbox-input-send-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* ********************************** */
+        /* theme dark                         */
+        .yackbox-theme-dark {
+            border: 1px solid #555555;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #212121;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .yackbox-theme-dark .yackbox-title-area {
+            background-color: #263238;
+            color: #eceff1;
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #37474f;
+        }
+
+        .yackbox-theme-dark .yackbox-messages-area {
+            background-color: #424242;
+            color: #eceff1;
+            padding: 10px;
+        }
+
+        .yackbox-theme-dark .yackbox-message-1 {
+            background-color: #004d40;
+            color: #b2dfdb;
+            padding: 6px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .yackbox-theme-dark .yackbox-message-2 {
+            background-color: #6a1b9a;
+            color: #e1bee7;
+            padding: 6px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .yackbox-theme-dark .yackbox-input-area {
+            padding: 8px;
+            background-color: #263238;
+        }
+
+        .yackbox-theme-dark .yackbox-input-textbox {
+            width: 75%;
+            padding: 8px;
+            background-color: #424242;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #eceff1;
+        }
+
+        .yackbox-theme-dark .yackbox-input-send-btn {
+            background-color: #1b5e20;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* ********************************** */
+        /* theme light */
+        .yackbox-theme-light {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .yackbox-theme-light .yackbox-title-area {
+            background-color: #3a3b3c;
+            /* Darker grey for header */
+            color: #ffffff;
+            padding: 12px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .yackbox-theme-light .yackbox-messages-area {
+            background-color: #f9f9f9;
+            /* Very light grey */
+            color: #333333;
+            padding: 12px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .yackbox-theme-light .yackbox-message-1 {
+            background-color: #e0f7fa;
+            /* Light teal */
+            color: #00796b;
+            /* Dark teal */
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .yackbox-theme-light .yackbox-message-2 {
+            background-color: #ffecb3;
+            /* Light yellow */
+            color: #f57c00;
+            /* Dark orange */
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .yackbox-theme-light .yackbox-input-area {
+            background-color: #ffffff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .yackbox-theme-light .yackbox-input-textbox {
+            flex-grow: 1;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333333;
+            margin-right: 10px;
+        }
+
+        .yackbox-theme-light .yackbox-input-send-btn {
+            background-color: #007bff;
+            /* ChatGPT/Vercel blue */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .yackbox-theme-light .yackbox-input-send-btn:hover {
+            background-color: #0056b3;
+            /* Darker blue */
+        }
+    </style>
+    <script>
+        // Yackbox component (rewrite)    
+        class yackbox {
+            constructor(parentElement, meta = { theme: 'yackbox-theme-light', onSend: () => { } }) {
+                this.parentElement = parentElement;
+                this.theme = meta.theme;
+                this.onSend = meta.onSend ? meta.onSend : () => { };
+                this.createWidget();
+                // title area
+                if (meta.titleArea) {
+                    this.titleAreaSet(meta.titleArea.title, meta.titleArea.align);
+                    if (meta.titleArea.show) {
+                        this.titleAreaShow();
+                    } else {
+                        this.titleAreaHide();
+                    }
+                }
+                this.attachEventListeners();
+            }
+
+            createWidget() {
+                const widgetHTML =
+                    `
+                    <div class="yackbox-base ${this.theme}">
+                    <div class="yackbox-title-area">
+                        <span style="font-size: 1.5em; font-weight: 600;">Title Area</span>
+                    </div>
+                    <div class="yackbox-messages-area"></div>
+                    <div class="yackbox-input-area">
+                        <textarea class="yackbox-input-textbox"></textarea>
+                        <button class="yackbox-input-send-btn">Send</button>
+                    </div>
+                    </div>
+                    `;
+
+                this.parentElement.innerHTML = widgetHTML;
+                this.chatWidget = this.parentElement.querySelector('.yackbox-base');
+                this.titleArea = this.chatWidget.querySelector('.yackbox-title-area');
+                this.messagesArea = this.chatWidget.querySelector('.yackbox-messages-area');
+                this.inputArea = this.chatWidget.querySelector('.yackbox-input-area');
+                this.textEntry = this.inputArea.querySelector('.yackbox-input-textbox');
+                this.sendButton = this.inputArea.querySelector('.yackbox-input-send-btn');
+            }
+
+            attachEventListeners() {
+                this.sendButton.addEventListener('click', () => this.onSend(this, this.textEntry.value.trim()));
+                window.addEventListener('resize', () => this.handleContainerResize());
+                this.chatWidget.addEventListener('resize', () => this.handleContainerResize());
+            }
+
+            titleAreaToggle() {
+                this.titleArea.style.display === 'none' ? this.titleAreaShow() : this.titleAreaHide();
+            }
+
+            titleAreaShow() {
+                this.titleArea.style.display = '';
+                this.adjustMessagesAreaHeight();
+            }
+
+            titleAreaHide() {
+                this.titleArea.style.display = 'none';
+                this.adjustMessagesAreaHeight();
+            }
+            titleAreaSet(title, align = 'center') {
+                this.titleArea.textContent = title;
+                this.titleArea.style.textAlign = align;
+            }
+            titleAreaGet() {
+                return this.titleArea.textContent;
+            }
+            inputAreaToggle() {
+                this.inputArea.classList.toggle('hidden');
+                this.inputArea.style.display === 'none' ? this.inputAreaShow() : this.inputAreaHide();
+            }
+
+            inputAreaShow() {
+                this.inputArea.style.display = '';
+                this.adjustMessagesAreaHeight();
+            }
+
+            inputAreaHide() {
+                this.inputArea.style.display = 'none';
+                this.adjustMessagesAreaHeight();
+            }
+
+            adjustMessagesAreaHeight() {
+                const hiddenElements = [...this.chatWidget.children].filter(child => child.classList.contains('hidden'));
+                const totalHiddenHeight = hiddenElements.reduce((sum, child) => sum + child.offsetHeight, 0);
+                const containerHeight = this.chatWidget.offsetHeight;
+                this.messagesArea.style.height = `calc(100% - ${containerHeight - totalHiddenHeight}px)`;
+            }
+
+            handleContainerResize() {
+                this.adjustMessagesAreaHeight();
+                this.adjustSendButtonWidth();
+                console.log('Container resized');
+            }
+
+            adjustSendButtonWidth() {
+                const sendButtonText = this.sendButton.textContent.trim();
+                const fontSize = parseFloat(getComputedStyle(this.sendButton).fontSize);
+                const minWidth = fontSize * sendButtonText.length + 16;
+                this.sendButton.style.minWidth = `${minWidth}px`;
+            }
+
+
+            addMessage(message, user = "foo", align = 'left') {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('yackbox-message');
+                messageDiv.classList.add(this.messagesArea.children.length % 2 === 1 ? 'yackbox-message-1' : 'yackbox-message-2');
+
+                const userDiv = document.createElement('div');
+                userDiv.textContent = user;
+                userDiv.style = `width: 100%; text-align: ${align}; font-size: 1em; font-weight:700; color: #444;`;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.style = `width: 100%; text-align: ${align};`;
+                contentDiv.textContent = message.trim();
+
+                messageDiv.appendChild(userDiv);
+                messageDiv.appendChild(contentDiv);
+                this.messagesArea.appendChild(messageDiv);
+                this.messagesArea.lastChild.scrollIntoView();
+
+                this.textEntry.value = '';
+                this.adjustMessagesAreaHeight();
+            }
+            removeMesssage(n) {
+                this.messagesArea.removeChild(this.messagesArea.children[n]);
+            }
+            getMessage(n) {
+                return this.messagesArea.children[n].lastChild.textContent;
+            }
+            appendMessage(n, message) {
+                this.messagesArea.children[n].lastChild.textContent += message;
+            }
+            updateMessage(n, message) {
+                this.messagesArea.children[n].lastChild.textContent = message;
+            }
+            changeTheme(newTheme) {
+                this.chatWidget.classList.remove(this.theme);
+                this.chatWidget.classList.add(newTheme);
+                this.theme = newTheme;
+            }
+        }
+
+        // Example usage:
+        // const parentDiv = document.querySelector('.parent');
+        // const yackbox = new yackbox(parentDiv, 'yackbox-theme-debug');
+
+    </script>
+
+</head>
+
+<body>
+    <h2>Component Styles and Resize Checks</h2>
+    <p>This is a test of a themeable chat widget with a title area, messages area, and input area. The title area and
+        input area can be hidden.</p>
+    <div class="containerDiv">
+        <div id="c1" class="parent"></div>
+        <div id="c2" class="parent"></div>
+    </div>
+    <br>
+    <button class="system-btn" onclick="chatBox.titleAreaToggle()">Toggle Title</button>
+    <button class="system-btn" onclick="chatBox.inputAreaToggle()">Toggle Input</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const parentDiv1 = document.querySelector('#c1');
+            window.chatBox = new yackbox(parentDiv1, {
+                theme: 'yackbox-theme-light',
+                titleArea: { title: 'Chat Box', align: 'left', show: true },
+                onSend: (chat, msg) => {
+                    chat.addMessage(msg, 'me', 'right')
+                }
+            });
+            chatBox.addMessage('Hello, how are you?', 'user', 'left');
+            chatBox.addMessage('I am fine, thank you.', 'bot', 'right');
+            chatBox.addMessage('How can I help you today?', 'user', 'left');
+            chatBox.addMessage('I can help with a chat widget.', 'bot', 'right');
+
+
+            const parentDiv2 = document.querySelector('#c2');
+            window.chatBox2 = new yackbox(parentDiv2, {
+                theme: 'yackbox-theme-light',
+                titleArea: { title: 'Chat Box', align: 'left', show: true },
+                onSend: (chat, msg) => {
+                    chat.addMessage(msg, 'me', 'right')
+                }
+            });
+            chatBox2.addMessage('Hello, how are you?', 'user', 'left');
+            chatBox2.addMessage('I am fine, thank you.', 'bot', 'right');
+            chatBox2.addMessage('How can I help you today?', 'user', 'left');
+            chatBox2.addMessage('I can help with a chat widget.', 'bot', 'right');
+        });
+    </script>
+</body>
+
+</html>
