@@ -96,13 +96,14 @@
         /* Theme styles : debug                      */
         .yackbox-theme-debug {
             border: 1px solid black;
-            border-radius: 10px;
-            padding: 5px;
+            border-radius: 8px;
+            padding: 10px;
             background-color: mediumorchid;
         }
 
         .yackbox-theme-debug .yackbox-title-area {
             background-color: lightblue;
+            padding: 8px;
             color: #333;
             font-size: 1.1em;
             font-weight: 700;
@@ -147,7 +148,7 @@
             border-radius: 8px;
             padding: 10px;
             background-color: #212121;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            
         }
 
         .yackbox-theme-dark .yackbox-title-area {
@@ -294,7 +295,7 @@
         }
     </style>
     <script>
-        // Yackbox component (rewrite)    
+        // yackbox component (rewrite)    
         class yackbox {
             constructor(parentElement, meta = { theme: 'yackbox-theme-light', onSend: () => { } }) {
                 this.parentElement = parentElement;
