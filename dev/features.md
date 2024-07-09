@@ -14,7 +14,7 @@ can be used in any "div", is responsive
 
 
 ## multi user
-Supports multiple users participating
+Supports multiple users participating (each user can have separate style)
 user management 
 
 ## multi instance
